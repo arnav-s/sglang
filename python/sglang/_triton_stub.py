@@ -226,5 +226,15 @@ def install() -> None:
     # triton.backends / triton.backends.compiler  (used by torch._inductor)
     backends = _make_mock("triton.backends")
     triton.backends = backends
-    compiler = _make_mock("triton.backends.compiler")
-    backends.compiler = compiler
+    backend_compiler = _make_mock("triton.backends.compiler")
+    backends.compiler = backend_compiler
+
+    # triton.compiler / triton.compiler.compiler (for torch._dynamo)
+    compiler = _make_mock("triton.compiler")
+    triton.compiler = compiler
+    cc = _make_mock("triton.compiler.compiler")
+    compiler.compiler = cc
+
+    # triton.runtime.autotuner (for torch._dynamo)
+    rt_autotuner = _make_mock("triton.runtime.autotuner")
+    runtime.autotuner = rt_autotuner
